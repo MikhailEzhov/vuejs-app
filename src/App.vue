@@ -1,23 +1,23 @@
 <template>
-  <h1>hi</h1>
+  <v-app>
+    <v-main>
+      <add-form />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
+import AddForm from "./components/AddForm.vue";
+
 export default {
   name: "App",
+
+  components: {
+    AddForm,
+  },
+
+  data: () => ({
+    //
+  }),
 };
 </script>
-
-<style>
-* {
-  padding: 0px;
-  margin: 0px;
-  border: none;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-</style>
