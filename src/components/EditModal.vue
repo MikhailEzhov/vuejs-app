@@ -2,7 +2,16 @@
   <v-card>
     <v-card-title class="d-flex justify-space-between align-center">
       <span>Task Change</span>
-      <v-btn color="error" variant="plain"> Delete </v-btn>
+      <v-btn
+        color="error"
+        variant="plain"
+        @click="
+          $emit('removeTask', task);
+          $emit('close');
+        "
+      >
+        Delete
+      </v-btn>
     </v-card-title>
     <v-card-text>
       <v-container>

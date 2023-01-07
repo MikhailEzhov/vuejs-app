@@ -1,5 +1,5 @@
 <template>
-  <v-table>
+  <v-table v-if="tasks.length > 0">
     <thead>
       <tr>
         <th class="text-left">Title</th>
@@ -10,12 +10,14 @@
     <tbody>
       <tr v-for="task in tasks" :key="task.id">
         <td>{{ task.title }}</td>
+
         <td v-if="task.completed" class="text-center">
           <v-icon icon="mdi-check" color="green" />
         </td>
         <td v-else class="text-center">
           <v-icon icon="mdi-minus" color="red" />
         </td>
+
         <td class="text-center">
           <v-btn
             size="x-small"
@@ -34,8 +36,11 @@
         @changeTitle="changeTaskTitle"
         @changeCompleted="changeTaskCompleted"
         @saveTask="$emit('saveTask', task)"
+        @removeTask="$emit('removeTask', task)"
     /></v-dialog>
   </v-table>
+
+  <div v-else>No Tasks</div>
 </template>
 
 <script>
