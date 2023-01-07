@@ -37,13 +37,13 @@ export default {
       this.$refs.form.resetValidation();
     },
     onSubmit() {
-      if (this.valid) {
+      if (this.name.trim()) {
         const newTask = {
           id: Date.now(),
           title: this.name,
           completed: false,
         };
-        console.log(newTask);
+        this.$emit("createTask", newTask);
         this.reset();
         this.resetValidation();
       }
