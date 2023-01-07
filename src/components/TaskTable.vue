@@ -33,6 +33,7 @@
         @close="closeModal"
         @changeTitle="changeTaskTitle"
         @changeCompleted="changeTaskCompleted"
+        @saveTask="$emit('saveTask', task)"
     /></v-dialog>
   </v-table>
 </template>

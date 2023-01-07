@@ -27,7 +27,16 @@
       <v-btn color="blue-darken-1" variant="text" @click="$emit('close')">
         Close
       </v-btn>
-      <v-btn color="blue-darken-1" variant="text"> Save </v-btn>
+      <v-btn
+        color="blue-darken-1"
+        variant="text"
+        @click="
+          $emit('saveTask', task);
+          $emit('close');
+        "
+      >
+        Save
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>

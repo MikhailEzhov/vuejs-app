@@ -11,7 +11,7 @@
             ><div v-if="error">{{ error }}</div>
             <div v-else class="v-table">
               <my-loader v-if="loading" />
-              <task-table v-else :tasks="tasks" />
+              <task-table v-else :tasks="tasks" @saveTask="putTask" />
             </div>
           </v-col>
         </v-row>
@@ -63,6 +63,18 @@ export default {
       this.loading = true;
       taskService
         .post(newTask)
+        .then(() => {
+          this.getAllTasks();
+        })
+        .catch((error) => {
+          this.error = error.message;
+        });
+    },
+    putTask(task) {
+      this.loading = true;
+      const { id, ...data } = task;
+      taskService
+        .put(id, data)
         .then(() => {
           this.getAllTasks();
         })
