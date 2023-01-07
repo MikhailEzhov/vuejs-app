@@ -17,21 +17,62 @@
           <v-icon icon="mdi-minus" color="red" />
         </td>
         <td class="text-center">
-          <v-btn size="x-small" icon="mdi-pencil" color="info"></v-btn>
+          <v-btn
+            size="x-small"
+            icon="mdi-pencil"
+            color="info"
+            @click="openTask(task)"
+          ></v-btn>
         </td>
       </tr>
     </tbody>
+
+    <v-dialog v-model="visibilityModal" persistent
+      ><edit-modal
+        :task="task"
+        @close="closeModal"
+        @changeTitle="changeTaskTitle"
+        @changeCompleted="changeTaskCompleted"
+    /></v-dialog>
   </v-table>
 </template>
 
 <script>
+import EditModal from "@/components/EditModal.vue";
 export default {
   name: "TaskTable",
+
+  components: {
+    EditModal,
+  },
 
   props: {
     tasks: {
       type: Array,
       required: true,
+    },
+  },
+
+  data() {
+    return {
+      visibilityModal: false,
+      task: {},
+    };
+  },
+
+  methods: {
+    openTask(currentTask) {
+      this.task = currentTask;
+      this.visibilityModal = true;
+    },
+    changeTaskTitle(title) {
+      this.task = { ...this.task, title: title };
+    },
+    changeTaskCompleted(completed) {
+      this.task = { ...this.task, completed: completed };
+    },
+    closeModal() {
+      this.visibilityModal = false;
     },
   },
 };
