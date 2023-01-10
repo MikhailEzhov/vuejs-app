@@ -67,18 +67,18 @@ export default {
   },
 
   methods: {
-    openTask(currentTask) {
+    openTask: function (currentTask) {
       this.task = currentTask;
       this.visibilityModal = true;
     },
-    changeTaskTitle(title) {
-      this.task = { ...this.task, title: title };
-    },
-    changeTaskCompleted(completed) {
-      this.task = { ...this.task, completed: completed };
-    },
-    closeModal() {
+    closeModal: function () {
       this.visibilityModal = false;
+    },
+    changeTaskTitle: function (title) {
+      this.task = { ...this.task, title };
+    },
+    changeTaskCompleted: function (completed) {
+      this.task = { ...this.task, completed };
     },
   },
 };
