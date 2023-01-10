@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       tasks: [],
-      loading: true,
+      loading: false,
       error: null,
     };
   },
@@ -54,15 +54,16 @@ export default {
 
   methods: {
     getAllTasks() {
+      this.loading = true;
       taskService
         .getAll()
         .then((res) => {
           this.tasks = res.data;
+          this.loading = false;
         })
         .catch((error) => {
           this.error = error.message;
-        })
-        .finally(() => (this.loading = false));
+        });
     },
     postTask(newTask) {
       this.loading = true;
@@ -70,6 +71,7 @@ export default {
         .post(newTask)
         .then(() => {
           this.getAllTasks();
+          this.loading = false;
         })
         .catch((error) => {
           this.error = error.message;
@@ -82,6 +84,7 @@ export default {
         .put(id, data)
         .then(() => {
           this.getAllTasks();
+          this.loading = false;
         })
         .catch((error) => {
           this.error = error.message;
@@ -93,6 +96,7 @@ export default {
         .delete(task.id)
         .then(() => {
           this.getAllTasks();
+          this.loading = false;
         })
         .catch((error) => {
           this.error = error.message;
